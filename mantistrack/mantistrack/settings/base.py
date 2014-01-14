@@ -1,15 +1,18 @@
 """Common settings and globals."""
 
-
+from os import environ
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
+
+from django.core.exceptions import ImproperlyConfigured
+
 
 def get_env_variable(var_name):
     """ Try to find an environment variable named 'var_name'
         return exception on failure
     """
     try:
-        return os.environ[var_name]
+        return environ[var_name]
     except KeyError:
         error_msg = "The environment variable %s is not set" % var_name
         raise ImproperlyConfigured(error_msg)
@@ -21,7 +24,7 @@ DJANGO_ROOT = dirname(dirname(abspath(__file__)))
 # Absolute filesystem path to the top-level project folder:
 SITE_ROOT = dirname(DJANGO_ROOT)
 
-# Site name:
+# Site name:        assert isinstance(environ, object)
 SITE_NAME = basename(DJANGO_ROOT)
 
 # Add our project to our pythonpath, this way we don't need to type our project
@@ -213,7 +216,7 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-	'mantises',
+    'mantises',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

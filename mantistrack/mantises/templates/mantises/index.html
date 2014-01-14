@@ -1,0 +1,9 @@
+{% if top_mantis_list %}
+    <ul>
+    {% for mantis in top_mantis_list %}
+        <li><a href="{% url 'mantises:detail' mantis.id %}">{{ mantis.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No mantises are available.</p>
+{% endif %}
