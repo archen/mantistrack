@@ -50,7 +50,16 @@ SERVER_EMAIL = EMAIL_HOST_USER
 ########## END EMAIL CONFIGURATION
 
 ########## DATABASE CONFIGURATION
-DATABASES = {}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'mantistrack',                      # Or path to database file if using sqlite3.
+        'USER': 'mantistrack',                      # Not used with sqlite3.
+        'PASSWORD': '1234ASDFzxcv!QAZ',                  # Not used with sqlite3.
+        'HOST': '192.168.1.12',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
 ########## END DATABASE CONFIGURATION
 
 
