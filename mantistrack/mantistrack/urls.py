@@ -19,4 +19,7 @@ urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')),  # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
     url(r'^oauth2/', include('provider.oauth2.urls', namespace='oauth2')),
+
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
 )

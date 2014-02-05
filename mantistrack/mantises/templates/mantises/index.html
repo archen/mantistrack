@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 {% if top_mantis_list %}
     <ul>
     {% for mantis in top_mantis_list %}
@@ -7,3 +11,5 @@
 {% else %}
     <p>No mantises are available.</p>
 {% endif %}
+
+{%  endblock %}

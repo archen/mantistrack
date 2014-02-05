@@ -5,3 +5,4 @@ django-tastypie==0.11.0
 python-dateutil==2.2
 python-mimeparse==0.1.4
 six==1.5.2
+-e git+http://github.com/archen/django-oauth2-provider.git#egg=django-oauth2-provider
