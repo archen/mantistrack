@@ -211,7 +211,7 @@ THIRD_PARTY_APPS = (
     'tastypie',
     'provider',
     'provider.oauth2',
-    #'grappelli',      # REMOVED until python 3 support
+    'grappelli',      # REMOVED until python 3 support
 )
 
 # Apps specific for this project go here.
