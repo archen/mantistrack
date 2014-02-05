@@ -42,10 +42,9 @@
           </a>
           <a class="brand" href="#">mantistrack</a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{% url 'hackme:index' %}">Home</a></li>
+                <li class="active"><a href="/accounts/logout">Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
