@@ -1,7 +1,12 @@
+from datetime import datetime
+from dateutil import relativedelta
+
 # Core Django imports
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
+
+from photologue.models import Gallery
 
 
 class UserData(models.Model):
@@ -51,6 +56,8 @@ class Mantis(UserData):
     breed = models.ForeignKey(Breed)
     born = models.DateTimeField()
     died = models.DateTimeField(blank=True, null=True)
+    gallery = models.ForeignKey(Gallery, blank=True, null=True)
+
     VALUES = (
         ('0', 'Unknown'),
         ('1', 'Male'),
@@ -61,6 +68,32 @@ class Mantis(UserData):
 
     def __str__(self):
         return self.name
+
+    def age(self):
+        died_on = ""
+
+        if self.died:
+            age = relativedelta.relativedelta(self.died - self.born)
+            died_on = "Died on {0} at ".format(self.died)
+        else:
+            age = relativedelta.relativedelta(datetime.now(self.born.tzinfo), self.born)
+
+        if age.years > 1:
+            return "{0}{1:d} years {2:d} months and {3:d} days old".format(died_on, age.years, age.months, age.days)
+        elif age.years > 0:
+            return "{0}{1:d} year {2:d} months and {3:d} days old".format(died_on, age.years, age.months, age.days)
+        elif age.months > 1:
+            return "{0}{1:d} months and {2:d} days old".format(died_on, age.months, age.days)
+        elif age.months > 0:
+            return "{0}{1:d} month and {2:d} days old".format(died_on, age.months, age.days)
+        elif age.days > 0:
+            return "{0}{1:d} days old".format(died_on, age.days)
+        else:
+            return 0
+
+    def profile_pic(self):
+        photos = self.gallery.public()
+        return photos.filter().latest().get_thumbnail_url()
 
     class Meta:
         verbose_name = 'mantis'

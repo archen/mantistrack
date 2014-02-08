@@ -5,6 +5,7 @@ from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
 from django.core.exceptions import ImproperlyConfigured
+from photologue import PHOTOLOGUE_APP_DIR
 
 
 def get_env_variable(var_name):
@@ -115,8 +116,8 @@ STATICFILES_DIRS = (
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 ########## END STATIC FILE CONFIGURATION
 
@@ -165,6 +166,7 @@ TEMPLATE_LOADERS = (
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
 TEMPLATE_DIRS = (
     normpath(join(SITE_ROOT, 'templates')),
+    normpath(join(PHOTOLOGUE_APP_DIR, 'contrib/bootstrap/templates')),
 )
 ########## END TEMPLATE CONFIGURATION
 
@@ -215,6 +217,7 @@ THIRD_PARTY_APPS = (
     'provider',
     'provider.oauth2',
     'grappelli',      # REMOVED until python 3 support
+    'photologue',
 )
 
 # Apps specific for this project go here.
