@@ -1,6 +1,7 @@
 pip==1.5.2
 Django==1.6.1
 South==0.8.4
+Pillow
 django-reversion==1.8.0
 django-photologue==2.7
 dj-static==0.0.5
