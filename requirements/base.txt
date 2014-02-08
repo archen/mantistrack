@@ -1,7 +1,6 @@
 pip==1.5.2
 Django==1.6.1
 South==0.8.4
-Pillow
 django-reversion==1.8.0
 django-photologue==2.7
 dj-static==0.0.5
@@ -12,3 +11,4 @@ six==1.5.2
 django-grappelli
 psycopg2
 -e git+http://github.com/archen/django-oauth2-provider.git#egg=django-oauth2-provider
+-e git+http://github.com/archen/Pillow.git#egg=Pillow
