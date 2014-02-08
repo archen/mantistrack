@@ -49,7 +49,9 @@
             <li class="active"><a href="/accounts/login/?next={{ request.path }}">Login</a></li>
             {% endif %}
           </ul>
+                {% if user.id %}
                 <p class="navbar-text pull-right">Logged in as: {{ user.username }}</p>
+                {% endif %}
         </div><!--/.nav-collapse -->
       </div>
     </div>
