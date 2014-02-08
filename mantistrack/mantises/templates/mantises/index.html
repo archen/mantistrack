@@ -5,11 +5,16 @@
 {% block content %}
 
 {% if top_mantis_list %}
-    <ul>
     {% for mantis in top_mantis_list %}
-        <li><a href="{% url 'mantises:detail' mantis.id %}">{{ mantis.name }}</a></li>
+        <div>
+            {% if mantis.gallery.public %}
+            <div class="profile-photo">
+                <img src= {{ mantis.profile_pic }} />
+            </div>
+            {% endif %}
+            <a href="{% url 'mantises:detail' mantis.id %}">{{ mantis.name }}</a>
+        </div>
     {% endfor %}
-    </ul>
 {% else %}
     <p>No mantises are available.</p>
 {% endif %}

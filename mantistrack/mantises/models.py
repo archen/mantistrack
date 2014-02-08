@@ -52,7 +52,6 @@ class Prey(UserData):
 @python_2_unicode_compatible
 class Mantis(UserData):
     name = models.CharField(max_length=200)
-    instar = models.PositiveSmallIntegerField()
     breed = models.ForeignKey(Breed)
     born = models.DateTimeField()
     died = models.DateTimeField(blank=True, null=True)
@@ -90,6 +89,9 @@ class Mantis(UserData):
             return "{0}{1:d} days old".format(died_on, age.days)
         else:
             return 0
+
+    def instar(self):
+        return self.molt_set.latest('date').to_instar
 
     def profile_pic(self):
         photos = self.gallery.public()
