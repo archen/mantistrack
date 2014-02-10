@@ -4,14 +4,12 @@ MarkupSafe==0.18
 -e git+http://github.com/archen/Pillow.git#egg=Pillow
 Pygments==1.6
 South==0.8.4
-boto==2.25.0
 dj-static==0.0.5
 -e git+http://github.com/archen/django-datetime-widget.git#egg=django_datetime_widget-origin
 django-grappelli==2.5.1
 -e git+http://github.com/archen/django-oauth2-provider.git#egg=django_oauth2_provider-origin
 django-photologue==2.7
 django-reversion==1.8.0
-django-storages==1.1.8
 django-tagging==0.3.1
 django-tastypie==0.11.0
 docutils==0.11
