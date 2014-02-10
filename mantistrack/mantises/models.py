@@ -6,6 +6,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 
 from photologue.models import Gallery
 
@@ -92,7 +93,12 @@ class Mantis(UserData):
             return 0
 
     def instar(self):
-        return self.molt_set.latest('date').to_instar
+        try:
+            latest_molt = self.molt_set.latest('date').to_instar
+        except ObjectDoesNotExist as e:
+            latest_molt = 0
+
+        return latest_molt
 
     def profile_pic(self):
         photos = self.gallery.public()
