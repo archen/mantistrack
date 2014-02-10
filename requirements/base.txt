@@ -1,15 +1,31 @@
-pip==1.5.2
 Django==1.6.1
+Jinja2==2.7.2
+MarkupSafe==0.18
+-e git+http://github.com/archen/Pillow.git@2d0c6674678129e99552984e8e5c3376760c145c#egg=Pillow-origin/master
+Pygments==1.6
 South==0.8.4
-django-reversion==1.8.0
-django-photologue==2.7
+Sphinx==1.2
+boto==2.25.0
+coverage==3.7.1
 dj-static==0.0.5
+-e git+http://github.com/archen/django-datetime-widget.git@1776d0c9b083162cb4adcfd6da19d35cf66db465#egg=django_datetime_widget-origin/HEAD
+django-debug-toolbar==1.0.1
+django-discover-runner==1.0
+django-grappelli==2.5.1
+-e git+http://github.com/archen/django-oauth2-provider.git@4b2374b195d3136725a51c40751984b906e5d3b0#egg=django_oauth2_provider-origin/HEAD
+django-photologue==2.7
+django-reversion==1.8.0
+django-storages==1.1.8
+django-tagging==0.3.1
 django-tastypie==0.11.0
+docutils==0.11
+gunicorn==18.0
+psycopg2==2.5.2
+pystache==0.5.3
 python-dateutil==2.2
 python-mimeparse==0.1.4
+pytz==2013.9
+shortuuid==0.4
 six==1.5.2
-django-grappelli
-psycopg2
--e git+http://github.com/archen/django-oauth2-provider.git#egg=django-oauth2-provider
--e git+http://github.com/archen/Pillow.git#egg=Pillow
--e git+http://github.com/archen/django-datetime-widget.git#egg=django-datetime-widget
+sqlparse==0.1.10
+static==1.0.2
