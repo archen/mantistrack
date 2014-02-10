@@ -12,3 +12,4 @@ django-grappelli
 psycopg2
 -e git+http://github.com/archen/django-oauth2-provider.git#egg=django-oauth2-provider
 -e git+http://github.com/archen/Pillow.git#egg=Pillow
+-e git+http://github.com/archen/django-datetime-widget.git#egg=django-datetime-widget

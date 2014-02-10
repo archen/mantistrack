@@ -4,11 +4,11 @@ from django.views.generic import TemplateView
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from django.conf import settings
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.decorators import login_required
 
 
-from photologue.models import Photo
+from photologue.models import Photo, Gallery
 
 admin.autodiscover()
 
@@ -27,7 +27,14 @@ urlpatterns = patterns('',
                        url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
                        url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
 
-                       url(r'^photologue/photo/add/$', login_required(CreateView.as_view(model=Photo)), name='add-photo'),
+                       url(r'^photologue/photo/add/$', login_required(CreateView.as_view(model=Photo)),
+                           name='add-photo'),
+                       url(r'^photologue/gallery/add/$', login_required(CreateView.as_view(model=Gallery)),
+                           name='add-gallery'),
+                       url(r'^photologue/gallery/(?P<title_slug>.*)/edit',
+                           login_required(UpdateView.as_view(model=Gallery, slug_field='title_slug',
+                                                             slug_url_kwarg='title_slug')),
+                           name='edit-gallery'),
                        url(r'^photologue/', include('photologue.urls')),
                        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
                            {'document_root': settings.MEDIA_ROOT}),

@@ -218,6 +218,7 @@ THIRD_PARTY_APPS = (
     'provider.oauth2',
     'grappelli',      # REMOVED until python 3 support
     'photologue',
+    'datetimewidget',
 )
 
 # Apps specific for this project go here.

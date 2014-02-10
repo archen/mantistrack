@@ -5,6 +5,7 @@ from dateutil import relativedelta
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
+from django.core.urlresolvers import reverse
 
 from photologue.models import Gallery
 
@@ -97,6 +98,9 @@ class Mantis(UserData):
         photos = self.gallery.public()
         return photos.filter().latest().get_thumbnail_url()
 
+    def get_absolute_url(self):
+        return reverse('mantises:detail', kwargs={'mantis_id': self.id})
+
     class Meta:
         verbose_name = 'mantis'
         verbose_name_plural = 'mantises'
@@ -123,3 +127,6 @@ class Molt(UserData):
     def __str__(self):
         return u"Mantis {0:s} from {1:n} to {2:n} on {3:s}"\
             .format(str(self.mantis), self.from_instar, self.to_instar, str(self.date))
+
+    def get_absolute_url(self):
+        return reverse('mantises:molt-history', kwargs={'mantis_id': self.mantis.id})

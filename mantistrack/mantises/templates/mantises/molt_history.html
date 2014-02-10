@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ mantis.name }}'s Molt History{% endblock page_title %}
+
+{% block content %}
+
+{% if history %}
+    {% for molt in history %}
+        <div>
+            <a href="{% url 'mantises:edit-molt' molt.id %}">{{ molt.from_instar }} to {{ molt.to_instar }}</a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No molt history available.</p>
+{% endif %}
+
+{%  endblock %}

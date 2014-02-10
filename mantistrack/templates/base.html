@@ -15,6 +15,16 @@
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
     </style>
+      <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- place project specific Javascript in this file -->
+    <script src="{% static 'js/mantistrack.js' %}"></script>
+
+    {% block extra_js %}{% endblock extra_js %}
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -38,12 +48,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">mantistrack</a>
+          <a class="navbar-brand" href="{% url 'mantises:index' %}">mantistrack</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="{% url 'mantises:index' %}">Home</a></li>
+            <li class="active"><a href="/photologue">Galleries</a></li>
             {% if user.id %}
+            <li class="active"><a href="/mantises/mymantises/">my mantises</a></li>
             <li class="active"><a href="/accounts/logout/?next={{ request.path }}">Logout</a></li>
             {% else %}
             <li class="active"><a href="/accounts/login/?next={{ request.path }}">Login</a></li>
@@ -60,20 +71,15 @@
       <h1>{% block page_title %}{% endblock page_title %}</h1>
 
       {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
+        <p>
+            Welcome to mantistrack! This app is currently in what can best be called pre-beta.
+            What does that mean? I make no guarantees that anything uploaded to the site, be it data
+            or files, will survive! USE AT YOUR OWN RISK!
+        </p>
       {% endblock content %}
 
     </div> <!-- /container -->
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
-    <!-- place project specific Javascript in this file -->
-    <script src="{% static 'js/mantistrack.js' %}"></script>
-
-    {% block extra_js %}{% endblock extra_js %}
   </body>
 </html>

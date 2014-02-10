@@ -3,6 +3,10 @@
 {% block page_title %}{{ mantis.name }}{% endblock page_title %}
 
 {% block content %}
+    {% if user.id %}
+    <a href="{% url 'mantises:edit' mantis.id %}">Edit</a>
+    {% endif %}
+
     {% if mantis.gallery.public %}
     <div class="profile-photo">
         <img src= {{ mantis.profile_pic }} />
@@ -15,13 +19,14 @@
 <h3>Sex</h3>
         <p>{{ mantis.get_sex_display }}</p>
 <h3>Instar</h3>
-        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
     <form action="{% url 'mantises:molt' mantis.id %}" method="post">
         {% csrf_token %}
         {{ mantis.instar }} <button type="submit" class="btn btn-default">Molt</button>
     </form>
 
+    <a href="{% url 'mantises:molt-history' mantis.id %}" class="btn btn-default">Molt History</a>
 <h3>Age</h3>
         <p>{{ mantis.age }}</p>
 <h3>Notes</h3>

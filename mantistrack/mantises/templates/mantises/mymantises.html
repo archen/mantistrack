@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ user.username }}'s Mantises{% endblock page_title %}
+
+{% block content %}
+
+{% if mantis_list %}
+    {% for mantis in mantis_list %}
+        <div>
+            {% if mantis.gallery.public %}
+            <div class="profile-photo">
+                <img src= {{ mantis.profile_pic }} />
+            </div>
+            {% endif %}
+            <a href="{% url 'mantises:detail' mantis.id %}">{{ mantis.name }}</a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No mantises are available.</p>
+{% endif %}
+
+<a href="/mantises/mymantises/add/" class="btn btn-default">+ Mantis</a>
+
+{%  endblock %}

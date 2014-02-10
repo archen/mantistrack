@@ -1,9 +1,40 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
+from django.core.urlresolvers import reverse
 from django.db.utils import IntegrityError
+from django.views.generic.edit import CreateView, UpdateView
+
 from datetime import datetime
 
+from photologue.models import Gallery
+
 from mantises.models import Mantis, Molt
+from mantises.forms import MantisForm
+
+
+class MantisCreate(CreateView):
+    model = Mantis
+    form_class = MantisForm
+
+    def get_form(self, form_class):
+        form = super(MantisCreate, self).get_form(form_class)
+        form.instance.user_id = self.request.user.id
+        return form
+"""
+    Need to fix formatting of return for valid mantis creation
+
+    def form_valid(self, form):
+        gallery = Gallery(title=form.instance.name, title_slug=form.instance.name)
+        gallery.save()
+        form.instance.gallery = gallery
+        return render(self.request, 'mantises/mymantises.html')
+
+"""
+
+
+class MantisUpdate(UpdateView):
+    model = Mantis
+    form_class = MantisForm
 
 
 def index(request):
@@ -14,7 +45,14 @@ def index(request):
 
 def detail(request, mantis_id):
     mantis = get_object_or_404(Mantis, pk=mantis_id)
-    return render(request, 'mantises/detail.html', {'mantis': mantis})
+    return render(request, 'mantises/mantis_detail.html', {'mantis': mantis})
+
+
+@login_required
+def mymantises(request):
+    mantis_list = Mantis.objects.filter(user_id=request.user.id)
+    context = {'mantis_list': mantis_list}
+    return render(request, 'mantises/mymantises.html', context)
 
 
 @login_required
@@ -26,9 +64,18 @@ def molt(request, mantis_id):
                            from_instar=mantis.instar(), to_instar=mantis.instar()+1)
         molt_record.save()
     except IntegrityError:
-        return render(request, 'mantises/detail.html', {
+        return render(request, 'mantises/mantis_detail.html', {
             'mantis': mantis,
             'error_message': 'Error saving molt record.',
         })
 
-    return render(request, 'mantises/detail.html', {'mantis': mantis})
+    return render(request, 'mantises/mantis_detail.html', {'mantis': mantis})
+
+
+@login_required
+def molt_history(request, mantis_id):
+    mantis = get_object_or_404(Mantis, pk=mantis_id)
+
+    history = Molt.objects.filter(mantis=mantis)
+
+    return render(request, 'mantises/molt_history.html', {'history': history, 'mantis':mantis})
