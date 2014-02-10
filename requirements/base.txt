@@ -8,7 +8,9 @@ dj-static==0.0.5
 -e git+http://github.com/archen/django-datetime-widget.git#egg=django_datetime_widget-origin
 django-grappelli==2.5.1
 -e git+http://github.com/archen/django-oauth2-provider.git#egg=django_oauth2_provider-origin
-django-photologue==2.7
+-e git+http://github.com/archen/django-photologue.git#egg=photologueS3
+-e git+http://github.com/archen/django-storages.git#egg=django-storagesPy3k
+-e git+https://github.com/boto/boto.git@py3kport#egg=botopy3k
 django-reversion==1.8.0
 django-tagging==0.3.1
 django-tastypie==0.11.0
