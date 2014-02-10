@@ -7,12 +7,12 @@
 {% if top_mantis_list %}
     {% for mantis in top_mantis_list %}
         <div>
-            {% if mantis.gallery.public %}
+            <a href="{% url 'mantises:detail' mantis.id %}">
+                {% if mantis.gallery.public %}
             <div class="profile-photo">
                 <img src= {{ mantis.profile_pic }} />
             </div>
-            {% endif %}
-            <a href="{% url 'mantises:detail' mantis.id %}">{{ mantis.name }}</a>
+            {% endif %}{{ mantis.name }}</a>
         </div>
     {% endfor %}
 {% else %}

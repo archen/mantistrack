@@ -42,6 +42,16 @@ CACHES = {
 }
 ########## END CACHE CONFIGURATION
 
+AWS_STORAGE_BUCKET_NAME = get_env_variable('AWS_STORAGE_BUCKET_NAME')
+AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
+DEFAULT_FILE_STORAGE = 'mantistrack.s3utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'mantistrack.s3utils.StaticRootS3BotoStorage'
+S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+STATIC_URL = '%sstatic/' % S3_URL
+MEDIA_URL = '%smedia/' % S3_URL
+
+INSTALLED_APPS += ('storages',)
 
 """
 ########## TOOLBAR CONFIGURATION
