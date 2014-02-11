@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath=./mantistrack mantistrack.wsgi
+web: cd mantistrack; gunicorn mantistrack.wsgi
