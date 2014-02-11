@@ -2,6 +2,7 @@ Django==1.6.1
 Jinja2==2.7.2
 MarkupSafe==0.18
 -e git+http://github.com/archen/django-imagekit.git#egg=django-imagekit
+-e git+http://github.com/archen/pilkit.git#egg=pilkit
 -e git+http://github.com/archen/Pillow.git#egg=Pillow
 Pygments==1.6
 South==0.8.4
