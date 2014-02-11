@@ -1,14 +1,14 @@
 Django==1.6.1
 Jinja2==2.7.2
 MarkupSafe==0.18
--e git+http://github.com/archen/django-imagekit.git#imagekit
+-e git+http://github.com/archen/django-imagekit.git#egg=django-imagekit
 -e git+http://github.com/archen/Pillow.git#egg=Pillow
 Pygments==1.6
 South==0.8.4
 dj-static==0.0.5
--e git+http://github.com/archen/django-datetime-widget.git#egg=django_datetime_widget-origin
+-e git+http://github.com/archen/django-datetime-widget.git#egg=django_datetime_widget
 django-grappelli==2.5.1
--e git+http://github.com/archen/django-oauth2-provider.git#egg=django_oauth2_provider-origin
+-e git+http://github.com/archen/django-oauth2-provider.git#egg=django_oauth2_provider
 -e git+http://github.com/archen/django-photologue.git#egg=photologueS3
 -e git+http://github.com/archen/django-storages.git#egg=django-storagesPy3k
 -e git+https://github.com/boto/boto.git@py3kport#egg=botopy3k
