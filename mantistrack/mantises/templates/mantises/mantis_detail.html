@@ -3,43 +3,72 @@
 {% block page_title %}{{ mantis.name }}{% endblock page_title %}
 
 {% block content %}
+
     {% if user.id %}
     <a href="{% url 'mantises:edit' mantis.id %}">Edit</a>
     {% endif %}
 
     {% if mantis.gallery.public %}
-    <div class="profile-photo">
-        <img src= {{ mantis.profile_pic }} />
-    </div>
+        <img class="thumbnail" src= {{ mantis.profile_pic }} />
     {% else %}
         <p>No pictures</p>
     {% endif %}
-<h3>Breed</h3>
-        <p>{{ mantis.breed }}</p>
-<h3>Sex</h3>
-        <p>{{ mantis.get_sex_display }}</p>
-<h3>Instar</h3>
+
+<div class="row multi-columns-row">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Breed</h3>
+            <p>{{ mantis.breed }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Sex</h3>
+                <p>{{ mantis.get_sex_display }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Instar</h3>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
     <form action="{% url 'mantises:molt' mantis.id %}" method="post">
         {% csrf_token %}
-        {{ mantis.instar }} <button type="submit" class="btn btn-default">Molt</button>
-    </form>
-
-    <a href="{% url 'mantises:molt-history' mantis.id %}" class="btn btn-default">Molt History</a>
-<h3>Age</h3>
-        <p>{{ mantis.age }}</p>
-<h3>Notes</h3>
-        <p>{{ mantis.notes }}</p>
-{% if mantis.gallery.public %}
-<h3>Pictures</h3>
-    <div class="photo-gallery">
-        {% for photo in mantis.gallery.public %}
-        <div class="gallery-photo">
-            <a href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" class="{% block gallery-photo-class %}{% endblock %}" alt="{{ photo.title }}"/></a>
+        <div class="row multi-columns-row">
+            <div class="col-xs-6 col-sm-6 col-md-1 col-lg-1">
+                {{ mantis.instar }}
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-default btn-sm">Molt</button>
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'mantises:molt-history' mantis.id %}">Molt History</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        {% endfor %}
+    </form>
     </div>
-{% endif %}
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Age</h3>
+        <p>{{ mantis.age }}</p>
+    </div>
+</div>
 
+<div class="row multi-columns-row">
+    <div class="col-xs-12 col-s-12 col-md-6 col-lg-6">
+        <h3>Notes</h3>
+        <p>{{ mantis.notes }}</p>
+    </div>
+    <div class="col-xs-12 col-s-12 col-md-6 col-lg-6">
+        <h3>Pictures</h3>
+        {% if mantis.gallery.public %}
+        <div class="photo-gallery">
+            {% for photo in mantis.gallery.public %}
+            <div class="gallery-photo">
+                <a href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" class="{% block gallery-photo-class %}{% endblock %}" alt="{{ photo.title }}"/></a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
 {%  endblock %}
