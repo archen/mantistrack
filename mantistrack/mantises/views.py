@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView
 
 from datetime import datetime
 
-from photologue.models import Gallery
+# from photologue.models import Gallery
 
 from mantises.models import Mantis, Molt
 from mantises.forms import MantisForm
