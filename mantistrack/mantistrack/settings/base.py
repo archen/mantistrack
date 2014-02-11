@@ -205,6 +205,7 @@ DJANGO_APPS = (
     # 'django.contrib.humanize',
 
     # Admin panel and documentation:
+    'grappelli',
     'django.contrib.admin',
     # 'django.contrib.admindocs',
 )
@@ -216,7 +217,6 @@ THIRD_PARTY_APPS = (
     'tastypie',
     'provider',
     'provider.oauth2',
-    'grappelli',      # REMOVED until python 3 support
     'photologue',
     'datetimewidget',
 )
