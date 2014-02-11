@@ -1,3 +1,4 @@
+# Python imports
 from datetime import datetime
 from dateutil import relativedelta
 
@@ -8,6 +9,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 
+# Third party imports
 from photologue.models import Gallery
 
 
