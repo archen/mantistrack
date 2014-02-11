@@ -1,24 +1,31 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block page_title %}{{ user.username }}'s Mantises{% endblock page_title %}
 
 {% block content %}
+<div id="mantisgrid" class="row multi-columns-row">
+    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+        <a class="btn btn-primary thumbnail text-center" href="/mantises/mymantises/add/" style="vertical-align: middle;">+ Mantis
+            <img src="{% static 'img/plus-256x256.png' %}">
+        </a>
+    </div>
 
-{% if mantis_list %}
-    {% for mantis in mantis_list %}
-        <div>
-            <a href="{% url 'mantises:detail' mantis.id %}">
-                {% if mantis.gallery.public %}
-                    <div class="profile-photo">
-                        <img src= {{ mantis.profile_pic }} />
-                    </div>
-                {% endif %}{{ mantis.name }}</a>
-        </div>
-    {% endfor %}
-{% else %}
-    <p>No mantises are available.</p>
-{% endif %}
+    {% if mantis_list %}
+        {% for mantis in mantis_list %}
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <a class="btn btn-default thumbnail text-center" href="{% url 'mantises:detail' mantis.id %}">
+                    {{ mantis.name }}
+                    {% if mantis.gallery.public %}
+                            <img src= {{ mantis.profile_pic }} />
+                    {% endif %}
+                </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No mantises are available.</p>
+    {% endif %}
+</div>
 
-<a href="/mantises/mymantises/add/" class="btn btn-default">+ Mantis</a>
-
+    <script>$('#mantisgrid div a').equalHeights();</script>
 {%  endblock %}
