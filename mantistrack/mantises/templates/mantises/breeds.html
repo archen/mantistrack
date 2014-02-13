@@ -5,18 +5,22 @@
 
 {% block content %}
 <div id="breedgrid" class="row multi-columns-row">
+    {% if user.id %}
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
         <a class="btn btn-primary thumbnail text-center" href="{% url 'mantises:add-breed' %}" style="vertical-align: middle;">
             <img src="{% static 'img/plus-gray-128x128.png' %}" >
         </a>
     </div>
+    {% endif %}
 
     {% if breed_list %}
         {% for breed in breed_list %}
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <a class="btn btn-default thumbnail text-center" href="{% url 'mantises:detail-breed' breed.id %}">
                     {{ breed.short_name }}
-                    <!-- TODO: add breed image -->
+                    {% if breed.picture %}
+                        <img src='{{ breed.breed_pic }}' />
+                    {% endif %}
                 </a>
             </div>
         {% endfor %}

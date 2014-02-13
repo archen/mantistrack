@@ -8,7 +8,7 @@ from datetime import datetime
 # from photologue.models import Gallery
 
 from mantises.models import Mantis, Molt, Breed
-from mantises.forms import MantisForm, BreedForm
+from mantises.forms import MantisForm, BreedForm, MoltForm
 
 
 class MantisCreate(CreateView):
@@ -51,9 +51,32 @@ class BreedUpdate(UpdateView):
     form_class = BreedForm
 
 
+class MoltCreate(CreateView):
+    model = Molt
+    form_class = MoltForm
+
+    def get_form(self, form_class):
+        form = super(MoltCreate, self).get_form(form_class)
+        form.instance.user_id = self.request.user.id
+        form.instance.mantis_id = self.kwargs['mantis_id']
+
+        return form
+
+
+class MoltUpdate(UpdateView):
+    model = Molt
+    form_class = MoltForm
+
+
 def index(request):
+    # todo: change to most viewed
     top_mantis_list = Mantis.objects.order_by('-name')[:5]
-    context = {'top_mantis_list': top_mantis_list}
+    # todo: change to most mantises in breed
+    top_breed_list = Breed.objects.order_by('-short_name')[:5]
+    context = {
+        'top_mantis_list': top_mantis_list,
+        'top_breed_list': top_breed_list,
+    }
     return render(request, 'mantises/index.html', context)
 
 
@@ -81,7 +104,7 @@ def mymantises(request):
 
 
 @login_required
-def molt(request, mantis_id):
+def do_molt(request, mantis_id):
     mantis = get_object_or_404(Mantis, pk=mantis_id)
 
     try:

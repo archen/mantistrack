@@ -17,10 +17,10 @@ urlpatterns = patterns('',
     url(r'^mymantises/add/$', login_required(views.MantisCreate.as_view()), name='add-mantis'),
 
     # Molt URLs
-    url(r'^(?P<mantis_id>\d+)/molt/$', views.molt, name='molt'),
-#    url(r'^molt/(?P<pk>\d+)/$', login_required(DetailView.as_view(model=Molt)), name='molt-view'),
-    url(r'^molt/(?P<pk>\d+)/edit/$', login_required(UpdateView.as_view(model=Molt)), name='edit-molt'),
-    url(r'^(?P<mantis_id>\d+)/molt-history/$', views.molt_history, name='molt-history'),
+    url(r'^(?P<mantis_id>\d+)/molt/$', views.do_molt, name='molt'),
+    url(r'^(?P<mantis_id>\d+)/molts/add/$', login_required(views.MoltCreate.as_view()), name='add-molt'),
+    url(r'^molts/(?P<pk>\d+)/edit/$', login_required(views.MoltUpdate.as_view()), name='edit-molt'),
+    url(r'^(?P<mantis_id>\d+)/molts/$', views.molt_history, name='molt-history'),
 
     # Breed URLs
     url(r'^breeds/$', views.breeds, name='breeds'),

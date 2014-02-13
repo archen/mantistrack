@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block page_title %}{{ mantis.name }}'s Molt History{% endblock page_title %}
+{% block page_title %}<a href={% url 'mantises:detail-mantis' mantis.id %}>{{ mantis.name }}</a>'s Molt History{% endblock page_title %}
 
 {% block content %}
 

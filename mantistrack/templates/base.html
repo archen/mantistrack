@@ -60,9 +60,10 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/photologue">Galleries</a></li>
+            <li class="active"><a href="{% url 'mantises:breeds' %}">Breeds</a></li>
+
             {% if user.id %}
             <li class="active"><a href="{% url 'mantises:mymantises' %}">My Mantises</a></li>
-            <li class="active"><a href="{% url 'mantises:breeds' %}">Breeds</a></li>
             <li class="active"><a href="/accounts/logout/?next={{ request.path }}">Logout</a></li>
             {% else %}
             <li class="active"><a href="/accounts/login/?next={{ request.path }}">Login</a></li>

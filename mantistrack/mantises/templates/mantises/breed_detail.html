@@ -8,6 +8,12 @@
     <a href="{% url 'mantises:edit-breed' breed.id %}">Edit</a>
     {% endif %}
 
+    {% if breed.picture %}
+        <img class="thumbnail" src= {{ breed.breed_pic }} />
+    {% else %}
+        <p>No picture</p>
+    {% endif %}
+
 <div class="row multi-columns-row">
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
         <h3>Long Name</h3>
@@ -15,23 +21,23 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
         <h3>Life Expectancy</h3>
-                <p>{{ breed.life_expectancy }}</p>
+                <p>{{ breed.life_expectancy }} years</p>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
         <h3>Low Environment Temperature</h3>
-            <p>{{ breed.low_temperature }}</p>
+            <p>{{ breed.low_temperature }} F</p>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
         <h3>High Environment Temperature</h3>
-            <p>{{ breed.high_temperature }}</p>
+            <p>{{ breed.high_temperature }} F</p>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
         <h3>Low Environment Humidity</h3>
-            <p>{{ breed.low_humidity }}</p>
+            <p>{{ breed.low_humidity }} %</p>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
         <h3>High Environment Humidity</h3>
-            <p>{{ breed.high_humidity }}</p>
+            <p>{{ breed.high_humidity }} %</p>
     </div>
 </div>
 

@@ -7,7 +7,7 @@
     {% if top_mantis_list %}
         {% for mantis in top_mantis_list %}
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                <a class="btn btn-default thumbnail text-center" href="{% url 'mantises:detail' mantis.id %}">
+                <a class="btn btn-default thumbnail text-center" href="{% url 'mantises:detail-mantis' mantis.id %}">
                     {{ mantis.name }}
                     {% if mantis.gallery.public %}
                             <img src= {{ mantis.profile_pic }} />
@@ -20,6 +20,27 @@
     {% endif %}
 </div>
 
-<script>$('#mantisgrid div a').equalHeights();</script>
+<div id="breedgrid" class="row multi-columns-row">
+{% if top_breed_list %}
+    <h1>Top Breeds</h1>
+    {% for breed in top_breed_list %}
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+            <a class="btn btn-default thumbnail text-center" href="{% url 'mantises:detail-breed' breed.id %}">
+                {{ breed.short_name }}
+                {% if breed.picture %}
+                        <img src= {{ breed.breed_pic }} />
+                {% endif %}
+            </a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No breeds are available.</p>
+{% endif %}
+</div>
+
+<script>
+    $('#mantisgrid div a').equalHeights();
+    $('#breedgrid div a').equalHeights();
+</script>
 
 {%  endblock %}
