@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ breed.short_name }}{% endblock page_title %}
+
+{% block content %}
+
+    {% if user.id %}
+    <a href="{% url 'mantises:edit-breed' breed.id %}">Edit</a>
+    {% endif %}
+
+<div class="row multi-columns-row">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Long Name</h3>
+            <p>{{ breed.long_name }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Life Expectancy</h3>
+                <p>{{ breed.life_expectancy }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Low Environment Temperature</h3>
+            <p>{{ breed.low_temperature }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>High Environment Temperature</h3>
+            <p>{{ breed.high_temperature }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Low Environment Humidity</h3>
+            <p>{{ breed.low_humidity }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>High Environment Humidity</h3>
+            <p>{{ breed.high_humidity }}</p>
+    </div>
+</div>
+
+{%  endblock %}

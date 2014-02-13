@@ -61,7 +61,8 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/photologue">Galleries</a></li>
             {% if user.id %}
-            <li class="active"><a href="/mantises/mymantises/">my mantises</a></li>
+            <li class="active"><a href="{% url 'mantises:mymantises' %}">My Mantises</a></li>
+            <li class="active"><a href="{% url 'mantises:breeds' %}">Breeds</a></li>
             <li class="active"><a href="/accounts/logout/?next={{ request.path }}">Logout</a></li>
             {% else %}
             <li class="active"><a href="/accounts/login/?next={{ request.path }}">Login</a></li>

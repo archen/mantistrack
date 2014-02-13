@@ -5,7 +5,7 @@
 {% block content %}
 
     {% if user.id %}
-    <a href="{% url 'mantises:edit' mantis.id %}">Edit</a>
+    <a href="{% url 'mantises:edit-mantis' mantis.id %}">Edit</a>
     {% endif %}
 
     {% if mantis.gallery.public %}

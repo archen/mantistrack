@@ -33,6 +33,8 @@ class Breed(UserData):
     def __str__(self):
         return self.short_name
 
+    def get_absolute_url(self):
+        return reverse('mantises:detail-breed', kwargs={'mantis_id': self.id})
 
 @python_2_unicode_compatible
 class Prey(UserData):
