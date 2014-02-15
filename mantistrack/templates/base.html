@@ -55,23 +55,47 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{% url 'mantises:index' %}">mantistrack</a>
+          <a class="navbar-brand" href="/">mantistrack</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/photologue">Galleries</a></li>
-            <li class="active"><a href="{% url 'mantises:breeds' %}">Breeds</a></li>
-
+            <li><a href="/photologue">Galleries</a></li>
+            <li class="dropdown">
+                <a href="{% url 'mantises:index' %}" class="dropdown-toggle" data-toggle="dropdown">Mantises <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'mantises:index' %}">Top Mantises</a></li>
+                    <li><a href="{% url 'mantises:breeds' %}">Breeds</a></li>
+                    {% if user.id %}
+                    <li class="divider"></li>
+                    <li><a href="{% url 'mantises:mymantises' %}">My Mantises</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="{% url 'containers:index' %}" class="dropdown-toggle" data-toggle="dropdown">Containers <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'containers:containers' %}">Containers</a></li>
+                    <li><a href="{% url 'containers:container-types' %}">Container Types</a></li>
+                    {% if user.id %}
+                    <li class="divider"></li>
+                    <li><a href="{% url 'containers:my-containers' %}">My Containers</a></li>
+                    <li><a href="{% url 'containers:my-container-types' %}">My Container Types</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
             {% if user.id %}
-            <li class="active"><a href="{% url 'mantises:mymantises' %}">My Mantises</a></li>
-            <li class="active"><a href="/accounts/logout/?next={{ request.path }}">Logout</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/accounts/logout/?next={{ request.path }}">Logout</a></li>
+                </ul>
+            </li>
             {% else %}
             <li class="active"><a href="/accounts/login/?next={{ request.path }}">Login</a></li>
             {% endif %}
           </ul>
-                {% if user.id %}
-                <p class="navbar-text pull-right">Logged in as: {{ user.username }}</p>
-                {% endif %}
         </div><!--/.nav-collapse -->
       </div>
     </div>

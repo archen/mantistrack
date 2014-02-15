@@ -1,8 +1,12 @@
 __author__ = 'archen'
 
+# Core Django imports
 from django import forms
+
+# Third party imports
 from datetimewidget.widgets import DateTimeWidget
 
+# App-specific imports
 from mantises.models import Mantis, Breed, Molt
 
 

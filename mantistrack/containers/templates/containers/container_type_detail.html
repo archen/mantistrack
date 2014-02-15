@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ container_type.name }}{% endblock page_title %}
+
+{% block content %}
+
+    {% if user.id %}
+    <a href="{% url 'containers:edit-container-type' container_type.id %}">Edit</a>
+    {% endif %}
+
+    {% if containertype.picture %}
+        <img class="thumbnail" src= {{ container_type.container_pic }} />
+    {% else %}
+        <p>No picture</p>
+    {% endif %}
+
+<div class="row multi-columns-row">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Height</h3>
+                <p>{{ container_type.height }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Length</h3>
+            <p>{{ container_type.length }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Width</h3>
+            <p>{{ container_type.width }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Type</h3>
+            <p>{{ container_type.get_type_display }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Link</h3>
+            <a href="{{ container_type.url }}">{{ container_type.url }}</a>
+    </div>
+</div>
+
+{%  endblock %}

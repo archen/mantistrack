@@ -1,22 +1,7 @@
 """Production settings and globals."""
 
+from .base import *
 
-from os import environ
-
-from base import *
-
-# Normally you should not import ANYTHING from Django directly
-# into your settings, but ImproperlyConfigured is an exception.
-from django.core.exceptions import ImproperlyConfigured
-
-
-def get_env_setting(setting):
-    """ Get the environment setting or return exception """
-    try:
-        return environ[setting]
-    except KeyError:
-        error_msg = "Set the %s env variable" % setting
-        raise ImproperlyConfigured(error_msg)
 
 ########## HOST CONFIGURATION
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
@@ -31,10 +16,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = environ.get('EMAIL_HOST', 'smtp.gmail.com')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-password
-EMAIL_HOST_PASSWORD = environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_HOST_PASSWORD = environ.get('EMAIL_HOST_PASSWORD', get_env_variable('MAIL_PASSWORD'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-user
-EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', 'your_email@example.com')
+EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', get_env_variable('MAIL_USER'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-port
 EMAIL_PORT = environ.get('EMAIL_PORT', 587)
@@ -49,17 +34,28 @@ EMAIL_USE_TLS = True
 SERVER_EMAIL = EMAIL_HOST_USER
 ########## END EMAIL CONFIGURATION
 
+########## AWS CONFIGURATION
+AWS_STORAGE_BUCKET_NAME = get_env_variable('AWS_STORAGE_BUCKET_NAME')
+AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
+DEFAULT_FILE_STORAGE = 'mantistrack.s3utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'mantistrack.s3utils.StaticRootS3BotoStorage'
+S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+STATIC_URL = '%sstatic/' % S3_URL
+MEDIA_URL = '%smedia/' % S3_URL
+
+INSTALLED_APPS += ('storages',)
+########## END AWS CONFIGURATION
+
 ########## DATABASE CONFIGURATION
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'mantistrack',                      # Or path to database file if using sqlite3.
-        'USER': 'mantistrack',                      # Not used with sqlite3.
-        'PASSWORD': '1234ASDFzxcv!QAZ',                  # Not used with sqlite3.
-        'HOST': '192.168.1.12',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
 ########## END DATABASE CONFIGURATION
 
 
@@ -71,5 +67,5 @@ CACHES = {}
 
 ########## SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-SECRET_KEY = get_env_setting('SECRET_KEY')
+SECRET_KEY = get_env_variable('SECRET_KEY')
 ########## END SECRET CONFIGURATION

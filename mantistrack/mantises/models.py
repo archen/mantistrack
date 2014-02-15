@@ -12,6 +12,9 @@ from django.core.exceptions import ObjectDoesNotExist
 # Third party imports
 from photologue.models import Gallery, Photo
 
+# App-specific imports
+from containers.models import Container
+
 
 class UserData(models.Model):
     user = models.ForeignKey(User, editable=False)
@@ -66,6 +69,7 @@ class Mantis(UserData):
     born = models.DateTimeField()
     died = models.DateTimeField(blank=True, null=True)
     gallery = models.ForeignKey(Gallery, blank=True, null=True)
+    container = models.ForeignKey(Container, blank=True, null=True)
 
     VALUES = (
         ('0', 'Unknown'),

@@ -1,7 +1,7 @@
 # Core Django imports
 from django.contrib import admin
 
-# Third-party app imports
+# Third party app imports
 from reversion import VersionAdmin
 
 # Local app imports

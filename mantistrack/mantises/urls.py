@@ -1,11 +1,13 @@
 __author__ = 'archen'
 
+# Core Django imports
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
-from django.views.generic import UpdateView, DetailView
 
+# Third party imports
+
+# App-specific imports
 from mantises import views
-from mantises.models import Molt
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),

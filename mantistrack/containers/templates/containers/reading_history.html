@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block page_title %}<a href={% url 'containers:detail-container' container.id %}>{{ container.name }}</a>'s Reading History{% endblock page_title %}
+
+{% block content %}
+
+{% if history %}
+    {% for reading in history %}
+        <div>
+            <a href="{% url 'containers:edit-reading' reading.id %}">{{ reading.date }}</a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No reading history available.</p>
+{% endif %}
+
+{%  endblock %}
