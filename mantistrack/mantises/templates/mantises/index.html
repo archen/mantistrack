@@ -3,7 +3,7 @@
 {% block page_title %}Top Mantises{% endblock page_title %}
 
 {% block content %}
-<div id="mantisgrid" class="row multi-columns-row">
+<div id="mantis-grid" class="row multi-columns-row">
     {% if top_mantis_list %}
         {% for mantis in top_mantis_list %}
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
@@ -20,7 +20,7 @@
     {% endif %}
 </div>
 
-<div id="breedgrid" class="row multi-columns-row">
+<div id="breed-grid" class="row multi-columns-row">
 {% if top_breed_list %}
     <h1>Top Breeds</h1>
     {% for breed in top_breed_list %}
@@ -39,8 +39,8 @@
 </div>
 
 <script>
-    $('#mantisgrid div a').equalHeights();
-    $('#breedgrid div a').equalHeights();
+    $('#mantis-grid div a').equalHeights();
+    $('#breed-grid div a').equalHeights();
 </script>
 
 {%  endblock %}

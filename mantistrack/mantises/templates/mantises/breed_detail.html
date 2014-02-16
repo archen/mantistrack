@@ -24,6 +24,15 @@
                 <p>{{ breed.life_expectancy }} years</p>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Adult Instar</h3>
+            <p>Male: L{{ breed.adult_instar_male }}</p>
+            <p>Female: L{{breed.adult_instar_female }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Low Environment Humidity</h3>
+            <p>{{ breed.low_humidity }} %</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
         <h3>Low Environment Temperature</h3>
             <p>{{ breed.low_temperature }} F</p>
     </div>

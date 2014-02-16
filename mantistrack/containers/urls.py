@@ -28,6 +28,7 @@ urlpatterns = patterns('',
         name='edit-container-type'),
 
     # EnvironmentReading URLs
+    url(r'^(?P<container_id>\d+)/readings/(?P<pk>\d+)/$', views.detail_reading, name='detail-reading'),
     url(r'^(?P<container_id>\d+)/readings/add/$', login_required(views.EnvironmentReadingCreate.as_view()),
         name='add-reading'),
     url(r'^(?P<container_id>\d+)/readings/(?P<pk>\d+)/edit/$', login_required(views.EnvironmentReadingUpdate.as_view()),

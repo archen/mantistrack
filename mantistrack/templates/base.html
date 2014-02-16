@@ -67,7 +67,8 @@
                     <li><a href="{% url 'mantises:breeds' %}">Breeds</a></li>
                     {% if user.id %}
                     <li class="divider"></li>
-                    <li><a href="{% url 'mantises:mymantises' %}">My Mantises</a></li>
+                    <li><a href="{% url 'mantises:my-mantises' %}">My Mantises</a></li>
+                    <li><a href="{% url 'mantises:my-ooths' %}">My Ooths</a></li>
                     {% endif %}
                 </ul>
             </li>

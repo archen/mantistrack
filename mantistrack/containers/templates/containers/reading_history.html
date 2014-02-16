@@ -7,7 +7,7 @@
 {% if history %}
     {% for reading in history %}
         <div>
-            <a href="{% url 'containers:edit-reading' reading.id %}">{{ reading.date }}</a>
+            <a href="{% url 'containers:edit-reading' container.id reading.id %}">{{ reading.date }}</a>
         </div>
     {% endfor %}
 {% else %}

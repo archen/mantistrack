@@ -17,11 +17,24 @@
 <div class="row multi-columns-row">
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
         <h3>Type</h3>
-                <p>{{ container.type.name }}</p>
+                <a href="{{ container.type.get_absolute_url }}">{{ container.type.name }}</a>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Environment Readings</h3>
+        <form action="{% url 'containers:add-reading' container.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default btn-sm">
+                + Reading
+            </button>
+        </form>
+        {% for reading in readings %}
+                <p>{{ reading }}</p>
+        {% endfor %}
     </div>
 </div>
 
 <div id="mantisgrid" class="row multi-columns-row">
+    <h3>Mantises</h3>
     {% if mantises %}
         {% for mantis in mantises %}
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">

@@ -1,16 +1,13 @@
 # Core Python imports
-from datetime import datetime
 
 # Core Django imports
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
-from django.db.utils import IntegrityError
 from django.views.generic.edit import CreateView, UpdateView
 
 # App-specific imports
 from containers.models import Container, ContainerType, EnvironmentReading
 from containers.forms import ContainerForm, ContainerTypeForm, EnvironmentReadingForm
-from mantises.models import Mantis
+from mantises.models import Mantis, Ooth
 
 
 class ContainerCreate(CreateView):
@@ -50,6 +47,7 @@ class EnvironmentReadingCreate(CreateView):
     def get_form(self, form_class):
         form = super(EnvironmentReadingCreate, self).get_form(form_class)
         form.instance.user_id = self.request.user.id
+        form.instance.container_id = self.kwargs['container_id']
         return form
 
 
@@ -91,8 +89,11 @@ def my_container_types(request):
 
 def detail_container(request, container_id):
     container = get_object_or_404(Container, pk=container_id)
+    readings = EnvironmentReading.objects.filter(container=container).order_by('-date')[:5]
     mantises = Mantis.objects.filter(container=container)
-    return render(request, 'containers/container_detail.html', {'container': container, 'mantises': mantises})
+    ooths = Ooth.objects.filter(container=container)
+    return render(request, 'containers/container_detail.html', {'container': container, 'mantises': mantises,
+                                                                'readings': readings, 'ooths': ooths})
 
 
 def detail_container_type(request, container_type_id):
@@ -101,7 +102,13 @@ def detail_container_type(request, container_type_id):
 
 
 def reading_history(request, container_id):
-    container = get_object_or_404(Container, container_id)
+    container = get_object_or_404(Container, pk=container_id)
     history = EnvironmentReading.objects.filter(container=container)
 
-    return render(request, 'containers/reading-history.html', {'container': container, 'history':history})
+    return render(request, 'containers/reading_history.html', {'container': container, 'history': history})
+
+
+def detail_reading(request, container_id, pk):
+    container = Container.objects.get(pk=container_id)
+    reading = container.environmentreading_set.get(pk=pk)
+    return render(request, 'containers/reading_detail.html', {'reading': reading})

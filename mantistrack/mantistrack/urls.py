@@ -26,7 +26,7 @@ urlpatterns = patterns('',
 
                        url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
                        url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
-                       url(r'^accounts/profile/$', 'mantises.views.mymantises'),
+                       url(r'^accounts/profile/$', 'mantises.views.my_mantises'),
 
                        url(r'^photologue/photo/add/$', login_required(CreateView.as_view(model=Photo)),
                            name='add-photo'),

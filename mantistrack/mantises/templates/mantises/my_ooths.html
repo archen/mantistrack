@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block page_title %}Ooths{% endblock page_title %}
+
+{% block content %}
+<div id="ooth-grid" class="row multi-columns-row">
+    {% if ooth_list %}
+        {% for ooth in ooth_list %}
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <a class="btn btn-default thumbnail text-center" href="{% url 'mantises:detail-ooth' ooth.laid_by.id ooth.id %}">
+                    {{ ooth }}
+                    {% if ooth.picture %}
+                        <img src='{{ ooth.pic }}' />
+                    {% endif %}
+                </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No ooths are available.</p>
+    {% endif %}
+</div>
+
+    <script>$('#ooth-grid div a').equalHeights();</script>
+{%  endblock %}

@@ -33,6 +33,8 @@ class Breed(UserData):
     high_temperature = models.DecimalField(max_digits=5, decimal_places=2)
     low_humidity = models.DecimalField(max_digits=5, decimal_places=2)
     high_humidity = models.DecimalField(max_digits=5, decimal_places=2)
+    adult_instar_male = models.SmallIntegerField()
+    adult_instar_female = models.SmallIntegerField()
 
     def __str__(self):
         return self.short_name
@@ -42,6 +44,7 @@ class Breed(UserData):
 
     def breed_pic(self):
         return self.picture.get_thumbnail_url()
+
 
 @python_2_unicode_compatible
 class Prey(UserData):
@@ -63,6 +66,17 @@ class Prey(UserData):
 
 
 @python_2_unicode_compatible
+class NymphColony(UserData):
+    name = models.CharField(max_length=200)
+    num_hatched = models.IntegerField(blank=True, null=True)
+    num_died = models.IntegerField(blank=True, null=True)
+    container = models.ForeignKey(Container, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+@python_2_unicode_compatible
 class Mantis(UserData):
     name = models.CharField(max_length=200)
     breed = models.ForeignKey(Breed)
@@ -70,6 +84,7 @@ class Mantis(UserData):
     died = models.DateTimeField(blank=True, null=True)
     gallery = models.ForeignKey(Gallery, blank=True, null=True)
     container = models.ForeignKey(Container, blank=True, null=True)
+    from_colony = models.ForeignKey(NymphColony, blank=True, null=True)
 
     VALUES = (
         ('0', 'Unknown'),
@@ -117,7 +132,15 @@ class Mantis(UserData):
         return photos.filter().latest().get_thumbnail_url()
 
     def get_absolute_url(self):
-        return reverse('mantises:detail', kwargs={'mantis_id': self.id})
+        return reverse('mantises:detail-mantis', kwargs={'mantis_id': self.id})
+
+    @property
+    def is_adult(self):
+        if (self.breed.adult_instar_male == self.instar() and self.get_sex_display() == 'Male') or \
+                (self.breed.adult_instar_female == self.instar() and self.get_sex_display() == 'Female'):
+            return True
+        else:
+            return False
 
     class Meta:
         verbose_name = 'mantis'
@@ -151,3 +174,27 @@ class Molt(UserData):
 
     def get_absolute_url(self):
         return reverse('mantises:molt-history', kwargs={'mantis_id': self.mantis.id})
+
+
+@python_2_unicode_compatible
+class Ooth(UserData):
+    picture = models.ForeignKey(Photo, blank=True, null=True)
+    laid_by = models.ForeignKey(Mantis, blank=True, null=True)
+    date_laid = models.DateTimeField()
+    date_hatched = models.DateTimeField(blank=True, null=True)
+    container = models.ForeignKey(Container, blank=True, null=True)
+    nymphs = models.ForeignKey(NymphColony, blank=True, null=True)
+
+    def __str__(self):
+        return u"Laid by {0:s} on {1:s}"\
+            .format(str(self.laid_by), str(self.date_laid))
+
+    def get_absolute_url(self):
+        return reverse('mantises:detail-ooth', kwargs={'mantis_id': self.laid_by.id, 'ooth_id': self.id})
+
+    def pic(self):
+        return self.picture.get_thumbnail_url()
+
+    class Meta:
+        verbose_name = 'ooth'
+        verbose_name_plural = 'oothecae'

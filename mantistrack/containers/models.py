@@ -67,6 +67,9 @@ class EnvironmentReading(UserData):
     def __str__(self):
         return u"{0} temperature: {1} humidity: {2}".format(self.date, self.temperature, self.humidity)
 
+    def get_absolute_url(self):
+        return reverse('containers:reading-history', kwargs={'container_id': self.container.id})
+
     class Meta:
         unique_together = ('date', 'container')
         verbose_name = 'environment reading'

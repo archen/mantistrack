@@ -7,8 +7,8 @@ from datetime import datetime
 
 # from photologue.models import Gallery
 
-from mantises.models import Mantis, Molt, Breed
-from mantises.forms import MantisForm, BreedForm, MoltForm
+from mantises.models import Mantis, Molt, Breed, Ooth
+from mantises.forms import MantisForm, BreedForm, MoltForm, OothForm
 
 
 class MantisCreate(CreateView):
@@ -26,7 +26,7 @@ class MantisCreate(CreateView):
         gallery = Gallery(title=form.instance.name, title_slug=form.instance.name)
         gallery.save()
         form.instance.gallery = gallery
-        return render(self.request, 'mantises/mymantises.html')
+        return render(self.request, 'mantises/my_mantises.html')
 
 """
 
@@ -68,6 +68,23 @@ class MoltUpdate(UpdateView):
     form_class = MoltForm
 
 
+class OothCreate(CreateView):
+    model = Ooth
+    form_class = OothForm
+
+    def get_form(self, form_class):
+        form = super(OothCreate, self).get_form(form_class)
+        form.instance.user_id = self.request.user.id
+        form.instance.mantis_id = self.kwargs['mantis_id']
+
+        return form
+
+
+class OothUpdate(UpdateView):
+    model = Ooth
+    form_class = OothForm
+
+
 def index(request):
     # todo: change to most viewed
     top_mantis_list = Mantis.objects.order_by('-name')[:5]
@@ -86,21 +103,28 @@ def breeds(request):
     return render(request, 'mantises/breeds.html', context)
 
 
-def detail(request, mantis_id):
+def detail_mantis(request, mantis_id):
     mantis = get_object_or_404(Mantis, pk=mantis_id)
-    return render(request, 'mantises/mantis_detail.html', {'mantis': mantis})
+    ooth_list = mantis.ooth_set.all()
+
+    if ooth_list:
+        context = {'mantis': mantis, 'ooth_list': ooth_list}
+    else:
+        context = {'mantis': mantis}
+
+    return render(request, 'mantises/mantis_detail.html', context)
 
 
-def breed_detail(request, breed_id):
+def detail_breed(request, breed_id):
     breed = get_object_or_404(Breed, pk=breed_id)
     return render(request, 'mantises/breed_detail.html', {'breed': breed})
 
 
 @login_required
-def mymantises(request):
+def my_mantises(request):
     mantis_list = Mantis.objects.filter(user_id=request.user.id)
     context = {'mantis_list': mantis_list}
-    return render(request, 'mantises/mymantises.html', context)
+    return render(request, 'mantises/my_mantises.html', context)
 
 
 @login_required
@@ -126,4 +150,17 @@ def molt_history(request, mantis_id):
 
     history = Molt.objects.filter(mantis=mantis)
 
-    return render(request, 'mantises/molt_history.html', {'history': history, 'mantis':mantis})
+    return render(request, 'mantises/molt_history.html', {'history': history, 'mantis': mantis})
+
+
+def my_ooths(request):
+    ooth_list = Ooth.objects.filter(user_id=request.user.id)
+
+    return render(request, 'mantises/my_ooths.html', {'ooth_list': ooth_list})
+
+
+def ooth_detail(request, mantis_id, ooth_id):
+    mantis = get_object_or_404(Mantis, pk=mantis_id)
+    ooth = get_object_or_404(Ooth, pk=ooth_id)
+
+    return render(request, 'mantises/ooth_detail.html', {'mantis': mantis, 'ooth': ooth})
