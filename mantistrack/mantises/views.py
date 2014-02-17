@@ -115,7 +115,7 @@ def detail_mantis(request, mantis_id):
     if ooth_list:
         context = {'mantis': mantis, 'ooth_list': ooth_list, 'notes': notes}
     else:
-        context = {'mantis': mantis}
+        context = {'mantis': mantis, 'notes': notes}
 
     return render(request, 'mantises/mantis_detail.html', context)
 

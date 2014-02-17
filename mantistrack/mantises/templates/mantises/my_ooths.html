@@ -10,7 +10,7 @@
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="dummy"></div>
                 <a class="btn btn-default thumbnail text-center in" href="{% url 'mantises:detail-ooth' ooth.laid_by.id ooth.id %}">
-                    {{ ooth }}
+                    {{ ooth.name }}
                     {% if ooth.picture %}
                         <img src='{{ ooth.pic }}' />
                     {% endif %}

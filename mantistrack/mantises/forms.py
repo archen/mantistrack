@@ -13,7 +13,7 @@ from mantises.models import Mantis, Breed, Molt, Ooth
 class MantisForm(forms.ModelForm):
     class Meta:
         model = Mantis
-        fields = ('name', 'breed', 'born', 'died', 'sex', 'notes', 'gallery', 'container', 'from_colony')
+        fields = ('name', 'breed', 'born', 'died', 'sex', 'gallery', 'container', 'from_colony')
         widgets = {
             'born': DateTimeWidget(),
             'died': DateTimeWidget(),
@@ -39,7 +39,7 @@ class MoltForm(forms.ModelForm):
 class OothForm(forms.ModelForm):
     class Meta:
         model = Ooth
-        fields = ('picture', 'laid_by', 'date_laid', 'date_hatched', 'container', 'nymphs')
+        fields = ('name', 'picture', 'laid_by', 'date_laid', 'date_hatched', 'container', 'nymphs')
         widgets = {
             'date_laid': DateTimeWidget(),
             'date_hatched': DateTimeWidget(),

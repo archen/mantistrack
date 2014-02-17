@@ -139,6 +139,7 @@ class Molt(NoteData):
 
 @python_2_unicode_compatible
 class Ooth(NoteData):
+    name = models.CharField(max_length=200, blank=True, null=True)
     picture = models.ForeignKey(Photo, blank=True, null=True)
     laid_by = models.ForeignKey(Mantis, blank=True, null=True)
     date_laid = models.DateTimeField()
