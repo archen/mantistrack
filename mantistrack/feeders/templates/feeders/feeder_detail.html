@@ -3,7 +3,6 @@
 {% block page_title %}{{ feeder.short_name }}{% endblock page_title %}
 
 {% block content %}
-
     {% if user.id %}
     <a href="{% url 'feeders:edit-feeder' feeder.id %}">Edit</a>
     {% endif %}
@@ -29,7 +28,22 @@
     </div>
 </div>
 
-<div class="col-xs-12 col-s-12 col-md-6 col-lg-6">
+<div class="note-container">
+    <h3>Notes</h3>
+
+    <div class="note-container-scroll">
+        <div>
+            <a class="btn btn-primary" style="width: 100%;" href="{% url 'notes:add-note' feeder.content_type feeder.id feeder.get_absolute_url %}">+ Note</a>
+        </div>
+        {% for note in notes %}
+        <div>
+            <a class="btn btn-default" href="{% url 'notes:edit-note' note.id %}">{{ note }}</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="row">
         <h3>Pictures</h3>
         {% if feeder.gallery.public %}
         <div class="photo-gallery">

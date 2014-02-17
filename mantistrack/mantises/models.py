@@ -13,11 +13,11 @@ from photologue.models import Gallery, Photo
 
 # App-specific imports
 from containers.models import Container
-from utils.models import UserData
+from notes.models import NoteData
 
 
 @python_2_unicode_compatible
-class Breed(UserData):
+class Breed(NoteData):
     picture = models.ForeignKey(Photo, blank=True, null=True)
     short_name = models.CharField(max_length=200, unique=True)
     long_name = models.CharField(max_length=300, unique=True)
@@ -40,7 +40,7 @@ class Breed(UserData):
 
 
 @python_2_unicode_compatible
-class NymphColony(UserData):
+class NymphColony(NoteData):
     name = models.CharField(max_length=200)
     num_hatched = models.IntegerField(blank=True, null=True)
     num_died = models.IntegerField(blank=True, null=True)
@@ -51,7 +51,7 @@ class NymphColony(UserData):
 
 
 @python_2_unicode_compatible
-class Mantis(UserData):
+class Mantis(NoteData):
     name = models.CharField(max_length=200)
     breed = models.ForeignKey(Breed)
     born = models.DateTimeField()
@@ -59,14 +59,12 @@ class Mantis(UserData):
     gallery = models.ForeignKey(Gallery, blank=True, null=True)
     container = models.ForeignKey(Container, blank=True, null=True)
     from_colony = models.ForeignKey(NymphColony, blank=True, null=True)
-
     VALUES = (
         ('0', 'Unknown'),
         ('1', 'Male'),
         ('2', 'Female'),
     )
     sex = models.CharField(max_length=1, choices=VALUES)
-    notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -122,7 +120,7 @@ class Mantis(UserData):
 
 
 @python_2_unicode_compatible
-class Molt(UserData):
+class Molt(NoteData):
     mantis = models.ForeignKey(Mantis)
     date = models.DateTimeField()
     from_instar = models.PositiveSmallIntegerField()
@@ -140,7 +138,7 @@ class Molt(UserData):
 
 
 @python_2_unicode_compatible
-class Ooth(UserData):
+class Ooth(NoteData):
     picture = models.ForeignKey(Photo, blank=True, null=True)
     laid_by = models.ForeignKey(Mantis, blank=True, null=True)
     date_laid = models.DateTimeField()

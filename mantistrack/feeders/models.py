@@ -6,13 +6,15 @@ from dateutil import relativedelta
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.generic import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
 
 # Third party imports
 from photologue.models import Gallery
 
 # App-specific imports
 from containers.models import Container
-from notes.models import NoteData
+from notes.models import NoteData, Note
 
 
 @python_2_unicode_compatible
@@ -117,6 +119,9 @@ class Feeding(NoteData):
     accepted = models.PositiveSmallIntegerField()
     total_fed = models.PositiveSmallIntegerField()
     feeding_date = models.DateTimeField()
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey()
 
     def __str__(self):
         return u"{0:s} {1:s}".format(self.feeder, self.feeding_date)

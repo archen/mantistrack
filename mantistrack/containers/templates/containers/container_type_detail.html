@@ -37,4 +37,19 @@
     </div>
 </div>
 
+<div class="note-container">
+    <h3>Notes</h3>
+
+    <div class="note-container-scroll">
+        <div>
+            <a class="btn btn-primary" style="width: 100%;" href="{% url 'notes:add-note' container_type.content_type container_type.id container_type.get_absolute_url %}">+ Note</a>
+        </div>
+        {% for note in notes %}
+        <div>
+            <a class="btn btn-default" href="{% url 'notes:edit-note' note.id %}">{{ note }}</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
 {%  endblock %}

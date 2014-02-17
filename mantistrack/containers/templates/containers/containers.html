@@ -8,7 +8,8 @@
     {% if container_list %}
         {% for container in container_list %}
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                <a class="btn btn-default thumbnail text-center" href="{% url 'containers:detail-container' container.id %}">
+                <div class="dummy"></div>
+                <a class="btn btn-default thumbnail text-center in" href="{% url 'containers:detail-container' container.id %}">
                     {{ container.name }}
                     {% if container.picture %}
                         <img src='{{ container.container_pic }}' />
@@ -20,6 +21,4 @@
         <p>No containers are available.</p>
     {% endif %}
 </div>
-
-    <script>$('#container-grid div a').equalHeights();</script>
 {%  endblock %}

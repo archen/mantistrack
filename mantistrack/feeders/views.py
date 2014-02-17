@@ -101,8 +101,12 @@ def my_batches(request):
 
 def detail_feeder(request, feeder_id):
     feeder = get_object_or_404(Feeder, pk=feeder_id)
+    if request.user.id == feeder.user.id:
+        notes = feeder.notes.all()
+    else:
+        notes = feeder.notes.filter(is_public=True)
 
-    return render(request, 'feeders/feeder_detail.html', {'feeder': feeder})
+    return render(request, 'feeders/feeder_detail.html', {'feeder': feeder, 'notes': notes})
 
 
 def hatch_history(request, batch_id):
@@ -114,5 +118,9 @@ def hatch_history(request, batch_id):
 
 def detail_batch(request, feeder_id, batch_id):
     batch = get_object_or_404(Batch, pk=batch_id)
+    if request.user.id == batch.user.id:
+        notes = batch.notes.all()
+    else:
+        notes = batch.notes.filter(is_public=True)
 
-    return render(request, 'feeders/batch_detail.html', {'batch': batch})
+    return render(request, 'feeders/batch_detail.html', {'batch': batch, 'notes': notes})

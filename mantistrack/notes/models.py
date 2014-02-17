@@ -21,7 +21,7 @@ class Note(UserData):
     content_object = GenericForeignKey()
 
     def __str__(self):
-        return "By {0:s} on {1:s}".format(self.user.get_short_name(), str(self.date))
+        return "By {0:s} on {1:s}".format(self.user.username, self.date.strftime("%a %x at %X"))
 
     def get_absolute_url(self):
         return reverse('notes:detail-note', kwargs={'note_id': self.id})
@@ -32,3 +32,7 @@ class NoteData(UserData):
 
     class Meta:
         abstract = True
+
+    @property
+    def content_type(self):
+        return ContentType.objects.get_for_model(self)

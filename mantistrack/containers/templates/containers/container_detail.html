@@ -38,7 +38,8 @@
     {% if mantises %}
         {% for mantis in mantises %}
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                <a class="btn btn-default thumbnail text-center" href="{% url 'mantises:detail-mantis' mantis.id %}">
+                <div class="dummy"></div>
+                <a class="btn btn-default thumbnail text-center in" href="{% url 'mantises:detail-mantis' mantis.id %}">
                     {{ mantis.name }}
                     {% if mantis.gallery.public %}
                             <img src= {{ mantis.profile_pic }} />
@@ -51,8 +52,19 @@
     {% endif %}
 </div>
 
-<script>
-    $('#mantisgrid div a').equalHeights();
-</script>
+<div class="note-container">
+    <h3>Notes</h3>
+
+    <div class="note-container-scroll">
+        <div>
+            <a class="btn btn-primary" style="width: 100%;" href="{% url 'notes:add-note' container.content_type container.id container.get_absolute_url %}">+ Note</a>
+        </div>
+        {% for note in notes %}
+        <div>
+            <a class="btn btn-default" href="{% url 'notes:edit-note' note.id %}">{{ note }}</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
 {%  endblock %}

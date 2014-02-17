@@ -92,13 +92,21 @@ def detail_container(request, container_id):
     readings = EnvironmentReading.objects.filter(container=container).order_by('-date')[:5]
     mantises = Mantis.objects.filter(container=container)
     ooths = Ooth.objects.filter(container=container)
+    if request.user.id == container.user.id:
+        notes = container.notes.all()
+    else:
+        notes = container.notes.filter(is_public=True)
     return render(request, 'containers/container_detail.html', {'container': container, 'mantises': mantises,
-                                                                'readings': readings, 'ooths': ooths})
+                                                                'readings': readings, 'ooths': ooths, 'notes': notes})
 
 
 def detail_container_type(request, container_type_id):
     container_type = get_object_or_404(ContainerType, pk=container_type_id)
-    return render(request, 'containers/container_type_detail.html', {'container_type': container_type})
+    if request.user.id == container_type.user.id:
+        notes = container_type.notes.all()
+    else:
+        notes = container_type.notes.filter(is_public=True)
+    return render(request, 'containers/container_type_detail.html', {'container_type': container_type, 'notes': notes})
 
 
 def reading_history(request, container_id):
@@ -111,4 +119,8 @@ def reading_history(request, container_id):
 def detail_reading(request, container_id, pk):
     container = Container.objects.get(pk=container_id)
     reading = container.environmentreading_set.get(pk=pk)
-    return render(request, 'containers/reading_detail.html', {'reading': reading})
+    if request.user.id == reading.user.id:
+        notes = reading.notes.all()
+    else:
+        notes = reading.notes.filter(is_public=True)
+    return render(request, 'containers/reading_detail.html', {'reading': reading, 'notes': notes})

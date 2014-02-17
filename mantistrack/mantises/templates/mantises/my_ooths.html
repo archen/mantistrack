@@ -8,7 +8,8 @@
     {% if ooth_list %}
         {% for ooth in ooth_list %}
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                <a class="btn btn-default thumbnail text-center" href="{% url 'mantises:detail-ooth' ooth.laid_by.id ooth.id %}">
+                <div class="dummy"></div>
+                <a class="btn btn-default thumbnail text-center in" href="{% url 'mantises:detail-ooth' ooth.laid_by.id ooth.id %}">
                     {{ ooth }}
                     {% if ooth.picture %}
                         <img src='{{ ooth.pic }}' />
@@ -21,5 +22,4 @@
     {% endif %}
 </div>
 
-    <script>$('#ooth-grid div a').equalHeights();</script>
 {%  endblock %}

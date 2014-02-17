@@ -4,11 +4,10 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
 
 # App-specific imports
-from utils.models import UserData
-
+from notes.models import NoteData
 
 @python_2_unicode_compatible
-class ContainerType(UserData):
+class ContainerType(NoteData):
     name = models.CharField(max_length=200, unique=True)
     height = models.DecimalField(max_digits=5, decimal_places=2)
     length = models.DecimalField(max_digits=5, decimal_places=2)
@@ -37,7 +36,7 @@ class ContainerType(UserData):
 
 
 @python_2_unicode_compatible
-class Container(UserData):
+class Container(NoteData):
     name = models.CharField(max_length=200)
     type = models.ForeignKey(ContainerType)
 
@@ -53,14 +52,14 @@ class Container(UserData):
 
 
 @python_2_unicode_compatible
-class EnvironmentReading(UserData):
+class EnvironmentReading(NoteData):
     date = models.DateTimeField()
     temperature = models.DecimalField(max_digits=5, decimal_places=2)
     humidity = models.DecimalField(max_digits=5, decimal_places=2)
     container = models.ForeignKey(Container)
 
     def __str__(self):
-        return u"{0} temperature: {1} humidity: {2}".format(self.date, self.temperature, self.humidity)
+        return u"By {0} on {1}".format(self.user.username, self.date.strftime("%a %x at %X"))
 
     def get_absolute_url(self):
         return reverse('containers:reading-history', kwargs={'container_id': self.container.id})

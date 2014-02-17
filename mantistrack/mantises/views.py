@@ -107,8 +107,13 @@ def detail_mantis(request, mantis_id):
     mantis = get_object_or_404(Mantis, pk=mantis_id)
     ooth_list = mantis.ooth_set.all()
 
+    if request.user.id == mantis.user.id:
+        notes = mantis.notes.all()
+    else:
+        notes = mantis.notes.filter(is_public=True)
+
     if ooth_list:
-        context = {'mantis': mantis, 'ooth_list': ooth_list}
+        context = {'mantis': mantis, 'ooth_list': ooth_list, 'notes': notes}
     else:
         context = {'mantis': mantis}
 
@@ -117,7 +122,11 @@ def detail_mantis(request, mantis_id):
 
 def detail_breed(request, breed_id):
     breed = get_object_or_404(Breed, pk=breed_id)
-    return render(request, 'mantises/breed_detail.html', {'breed': breed})
+    if request.user.id == breed.user.id:
+        notes = breed.notes.all()
+    else:
+        notes = breed.notes.filter(is_public=True)
+    return render(request, 'mantises/breed_detail.html', {'breed': breed, 'notes': notes})
 
 
 @login_required
@@ -158,8 +167,12 @@ def my_ooths(request):
     return render(request, 'mantises/my_ooths.html', {'ooth_list': ooth_list})
 
 
-def ooth_detail(request, mantis_id, ooth_id):
+def detail_ooth(request, mantis_id, ooth_id):
     mantis = get_object_or_404(Mantis, pk=mantis_id)
     ooth = get_object_or_404(Ooth, pk=ooth_id)
+    if request.user.id == ooth.user.id:
+        notes = ooth.notes.all()
+    else:
+        notes = ooth.notes.filter(is_public=True)
 
-    return render(request, 'mantises/ooth_detail.html', {'mantis': mantis, 'ooth': ooth})
+    return render(request, 'mantises/ooth_detail.html', {'mantis': mantis, 'ooth': ooth, 'notes': notes})

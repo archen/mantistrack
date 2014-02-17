@@ -1,1 +1,30 @@
 /*! project specific CSS goes here. */
+.dummy {
+        margin-top: 100%;
+    }
+.in {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 20px;
+}
+.addbutton {
+    max-height: 128px;
+    max-width: 128px;
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.note-container{
+    display:inline-block;
+}
+.note-container-scroll{
+    float: left;
+    overflow-y: scroll;
+    max-height: 300px;
+}

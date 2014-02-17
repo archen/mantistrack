@@ -32,7 +32,7 @@ urlpatterns = patterns('',
 
     # Ooth URLs
     url(r'^ooths/$', views.my_ooths, name='my-ooths'),
-    url(r'^(?P<mantis_id>\d+)/ooths/(?P<ooth_id>\d+)/$', views.ooth_detail, name='detail-ooth'),
+    url(r'^(?P<mantis_id>\d+)/ooths/(?P<ooth_id>\d+)/$', views.detail_ooth, name='detail-ooth'),
     url(r'^(?P<mantis_id>\d+)/ooths/add/$', login_required(views.OothCreate.as_view()), name='add-ooth'),
     url(r'^ooths/(?P<pk>\d+)/edit$', login_required(views.OothUpdate.as_view()), name='edit-ooth'),
 )
