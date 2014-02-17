@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ feeder.short_name }}{% endblock page_title %}
+
+{% block content %}
+
+    {% if user.id %}
+    <a href="{% url 'feeders:edit-feeder' feeder.id %}">Edit</a>
+    {% endif %}
+
+    {% if feeder.gallery.public %}
+        <img class="thumbnail" src= {{ feeder.pic }} />
+    {% else %}
+        <p>No picture</p>
+    {% endif %}
+
+<div class="row multi-columns-row">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Short Name</h3>
+            <p>{{ feeder.short_name }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Long Name</h3>
+            <p>{{ feeder.long_name }}</p>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <h3>Available</h3>
+            <p>{{ feeder.available }}</p>
+    </div>
+</div>
+
+<div class="col-xs-12 col-s-12 col-md-6 col-lg-6">
+        <h3>Pictures</h3>
+        {% if feeder.gallery.public %}
+        <div class="photo-gallery">
+            {% for photo in feeder.gallery.public %}
+            <div class="gallery-photo">
+                <a href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" class="{% block gallery-photo-class %}{% endblock %}" alt="{{ photo.title }}"/></a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+{%  endblock %}

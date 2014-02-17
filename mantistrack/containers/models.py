@@ -1,15 +1,10 @@
 # Core Django imports
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
 
-
-class UserData(models.Model):
-    user = models.ForeignKey(User, editable=False)
-
-    class Meta:
-        abstract = True
+# App-specific imports
+from utils.models import UserData
 
 
 @python_2_unicode_compatible

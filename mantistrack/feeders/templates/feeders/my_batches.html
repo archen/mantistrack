@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block page_title %}{{ user.username }}'s Batches{% endblock page_title %}
+
+{% block content %}
+<div id="batch-grid" class="row multi-columns-row">
+    {% if user.id %}
+    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+        <a class="btn btn-primary thumbnail text-center" href="{% url 'feeders:add-batch' %}" style="vertical-align: middle;">
+            <img src="{% static 'img/plus-gray-128x128.png' %}" >
+        </a>
+    </div>
+    {% endif %}
+
+    {% if batch_list %}
+        {% for batch in batch_list %}
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <a class="btn btn-default thumbnail text-center" href="{% url 'feeders:detail-batch' batch.feeder.id batch.id %}">
+                    {{ batch.name }}
+                </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No batches are available.</p>
+    {% endif %}
+</div>
+
+    <script>$('#batch-grid div a').equalHeights();</script>
+{%  endblock %}

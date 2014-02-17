@@ -4,7 +4,7 @@
 {% block page_title %}{{ user.username }}'s Containers{% endblock page_title %}
 
 {% block content %}
-<div id="containergrid" class="row multi-columns-row">
+<div id="container-grid" class="row multi-columns-row">
     {% if user.id %}
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
         <a class="btn btn-primary thumbnail text-center" href="{% url 'containers:add-container' %}" style="vertical-align: middle;">
@@ -29,5 +29,5 @@
     {% endif %}
 </div>
 
-    <script>$('#containergrid div a').equalHeights();</script>
+    <script>$('#container-grid div a').equalHeights();</script>
 {%  endblock %}

@@ -147,7 +147,6 @@ def do_molt(request, mantis_id):
 @login_required
 def molt_history(request, mantis_id):
     mantis = get_object_or_404(Mantis, pk=mantis_id)
-
     history = Molt.objects.filter(mantis=mantis)
 
     return render(request, 'mantises/molt_history.html', {'history': history, 'mantis': mantis})

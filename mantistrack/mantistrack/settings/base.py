@@ -219,12 +219,16 @@ THIRD_PARTY_APPS = (
     'provider.oauth2',
     'photologue',
     'datetimewidget',
+    'collectfast',
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'mantises',
     'containers',
+    'feeders',
+    'notes',
+    'utils',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

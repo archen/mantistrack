@@ -4,7 +4,6 @@ from dateutil import relativedelta
 
 # Core Django imports
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
@@ -14,13 +13,7 @@ from photologue.models import Gallery, Photo
 
 # App-specific imports
 from containers.models import Container
-
-
-class UserData(models.Model):
-    user = models.ForeignKey(User, editable=False)
-
-    class Meta:
-        abstract = True
+from utils.models import UserData
 
 
 @python_2_unicode_compatible
@@ -44,25 +37,6 @@ class Breed(UserData):
 
     def breed_pic(self):
         return self.picture.get_thumbnail_url()
-
-
-@python_2_unicode_compatible
-class Prey(UserData):
-    short_name = models.CharField(max_length=200)
-    long_name = models.CharField(max_length=300)
-    VALUES = (
-        ('0', 'In Stock'),
-        ('1', 'Pupating'),
-        ('2', 'Out of Stock')
-    )
-    status = models.CharField(max_length=1, choices=VALUES)
-
-    def __str__(self):
-        return u"{0:s} {1:s}".format(self.short_name, self.get_status_display())
-
-    class Meta:
-        verbose_name = 'prey'
-        verbose_name_plural = 'prey'
 
 
 @python_2_unicode_compatible
@@ -145,17 +119,6 @@ class Mantis(UserData):
     class Meta:
         verbose_name = 'mantis'
         verbose_name_plural = 'mantises'
-
-
-@python_2_unicode_compatible
-class Feeding(UserData):
-    prey = models.ForeignKey(Prey)
-    accepted = models.PositiveSmallIntegerField()
-    total_fed = models.PositiveSmallIntegerField()
-    feeding_date = models.DateTimeField()
-
-    def __str__(self):
-        return u"{0:s} {1:s}".format(self.prey, self.feeding_date)
 
 
 @python_2_unicode_compatible

@@ -5,7 +5,7 @@ from django.contrib import admin
 from reversion import VersionAdmin
 
 # Local app imports
-from mantises.models import Mantis, Breed, Prey, Feeding, Molt
+from mantises.models import Mantis, Breed, Molt
 
 
 class MantisAdmin(VersionAdmin):
@@ -24,22 +24,6 @@ class BreedAdmin(VersionAdmin):
         obj.save()
 
 
-class PreyAdmin(VersionAdmin):
-    list_display = ('__str__',)
-
-    def save_model(self, request, obj, form, change):
-        obj.user = request.user
-        obj.save()
-
-
-class FeedingAdmin(VersionAdmin):
-    list_display = ('__str__',)
-
-    def save_model(self, request, obj, form, change):
-        obj.user = request.user
-        obj.save()
-
-
 class MoltAdmin(VersionAdmin):
     list_display = ('__str__',)
 
@@ -49,6 +33,4 @@ class MoltAdmin(VersionAdmin):
 
 admin.site.register(Mantis, MantisAdmin)
 admin.site.register(Breed, BreedAdmin)
-admin.site.register(Prey, PreyAdmin)
-admin.site.register(Feeding, FeedingAdmin)
 admin.site.register(Molt, MoltAdmin)

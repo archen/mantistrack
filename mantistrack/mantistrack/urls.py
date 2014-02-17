@@ -15,6 +15,8 @@ urlpatterns = patterns('',
                        url(r'^$', TemplateView.as_view(template_name='base.html')),
                        url(r'^mantises/', include('mantises.urls', namespace='mantises')),
                        url(r'^containers/', include('containers.urls', namespace='containers')),
+                       url(r'^feeders/', include('feeders.urls', namespace='feeders')),
+                       url(r'^notes/', include('notes.urls', namespace='notes')),
 
                        # Uncomment the admin/doc line below to enable admin documentation:
                        # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

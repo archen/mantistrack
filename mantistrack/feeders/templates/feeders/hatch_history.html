@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block page_title %}<a href={% url 'feeders:detail-batch' batch.id %}>{{ batch.name }}</a>'s Hatch History{% endblock page_title %}
+
+{% block content %}
+
+{% if history %}
+    {% for hatch in history %}
+        <div>
+            <a href="{% url 'feeders:edit-hatch' hatch.id %}">{{ hatch.num_hatched }} hatched on {{ hatch.date }}</a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No hatch history available.</p>
+{% endif %}
+
+{%  endblock %}
