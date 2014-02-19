@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+
 {% block extra_js %}{{ form.media }}{% endblock extra_js %}
 {% block content %}
 
 <form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" name="submit" value="Submit">
+    {{ form|crispy }}
+    <button class="btn btn-default" type="submit">submit</button>
 </form>
 
 {%  endblock %}

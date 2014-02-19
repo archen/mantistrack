@@ -8,7 +8,7 @@
         {% for mantis in top_mantis_list %}
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="dummy"></div>
-                <a class="btn btn-default thumbnail text-center in" href="{% url 'mantises:detail-mantis' mantis.id %}">
+                <a class="btn btn-default thumbnail text-center in-square" href="{% url 'mantises:detail-mantis' mantis.id %}">
                     {{ mantis.name }}
                     {% if mantis.gallery.public %}
                             <img src= {{ mantis.profile_pic }} />
@@ -27,7 +27,7 @@
     {% for breed in top_breed_list %}
         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
             <div class="dummy"></div>
-            <a class="btn btn-default thumbnail text-center in" href="{% url 'mantises:detail-breed' breed.id %}">
+            <a class="btn btn-default thumbnail text-center in-square" href="{% url 'mantises:detail-breed' breed.id %}">
                 {{ breed.short_name }}
                 {% if breed.picture %}
                         <img src= {{ breed.breed_pic }} />

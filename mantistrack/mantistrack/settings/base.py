@@ -45,6 +45,9 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 ########## END DEBUG CONFIGURATION
 
+########## REGISTRATION CONFIGURATION
+ACCOUNT_ACTIVATION_DAYS = 3
+########## END REGISTRATION CONFIGURATION
 
 ########## MANAGER CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
@@ -220,6 +223,9 @@ THIRD_PARTY_APPS = (
     'photologue',
     'datetimewidget',
     'collectfast',
+    'registration',
+    'permissions',
+    'crispy_forms',
 )
 
 # Apps specific for this project go here.
@@ -268,6 +274,9 @@ LOGGING = {
 }
 ########## END LOGGING CONFIGURATION
 
+########## CRISPY FORMS CONFIGURATION
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+########## END CRISPY FORMS CONFIGURATION
 
 ########## WSGI CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application

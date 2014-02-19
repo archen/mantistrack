@@ -1,3 +1,7 @@
-from django.shortcuts import render
+# Third party imports
+from registration.backends.default.views import RegistrationView
+from registration.forms import RegistrationFormUniqueEmail
 
-# Create your views here.
+
+class CustomRegistrationView(RegistrationView):
+    form_class = RegistrationFormUniqueEmail

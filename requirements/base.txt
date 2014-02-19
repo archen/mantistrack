@@ -8,6 +8,7 @@ Pygments==1.6
 South==0.8.4
 dj-static==0.0.5
 -e git+http://github.com/archen/django-datetime-widget.git#egg=django_datetime_widget
+django-crispy-forms
 django-grappelli==2.5.1
 -e git+http://github.com/archen/django-oauth2-provider.git#egg=django_oauth2_provider
 -e git+http://github.com/archen/django-photologue.git#egg=photologueS3
@@ -27,3 +28,4 @@ shortuuid==0.4
 six==1.5.2
 sqlparse==0.1.10
 static==1.0.2
+-e hg+https://bitbucket.org/jbzdak/django-registration-merge-repo/@jbzdak-merge-python3.3#egg=registration

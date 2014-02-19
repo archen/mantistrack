@@ -8,8 +8,8 @@
     {% if user.id %}
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
         <div class="dummy"></div>
-        <a class="btn btn-primary thumbnail text-center in" href="{% url 'containers:add-container' %}" style="vertical-align: middle;">
-            <img class="addbutton" src="{% static 'img/plus-gray-128x128.png' %}" >
+        <a class="btn btn-primary thumbnail text-center in-square" href="{% url 'containers:add-container' %}" style="vertical-align: middle;">
+            <img class="scalable-add-button" src="{% static 'img/plus-gray-128x128.png' %}" >
         </a>
     </div>
     {% endif %}
@@ -18,7 +18,7 @@
         {% for container in container_list %}
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="dummy"></div>
-                <a class="btn btn-default thumbnail text-center in" href="{% url 'containers:detail-container' container.id %}">
+                <a class="btn btn-default thumbnail text-center in-square" href="{% url 'containers:detail-container' container.id %}">
                     {{ container.name }}
                     {% if container.picture %}
                         <img src='{{ container.container_pic }}' />

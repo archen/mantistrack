@@ -2,7 +2,7 @@
 .dummy {
         margin-top: 100%;
     }
-.in {
+.in-square {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -10,7 +10,7 @@
     right: 0;
     margin: 20px;
 }
-.addbutton {
+.scalable-add-button {
     max-height: 128px;
     max-width: 128px;
     position:absolute;

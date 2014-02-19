@@ -8,8 +8,8 @@
     {% if user.id %}
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
         <div class="dummy"></div>
-        <a class="btn btn-primary thumbnail text-center in" href="{% url 'feeders:add-batch' %}">
-            <img class="addbutton" src="{% static 'img/plus-gray-128x128.png' %}" >
+        <a class="btn btn-primary thumbnail text-center in-square" href="{% url 'feeders:add-batch' %}">
+            <img class="scalable-add-button" src="{% static 'img/plus-gray-128x128.png' %}" >
         </a>
     </div>
     {% endif %}
@@ -18,7 +18,7 @@
         {% for batch in batch_list %}
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="dummy"></div>
-                <a class="btn btn-default thumbnail text-center in" href="{% url 'feeders:detail-batch' batch.feeder.id batch.id %}">
+                <a class="btn btn-default thumbnail text-center in-square" href="{% url 'feeders:detail-batch' batch.feeder.id batch.id %}">
                     {{ batch.name }}
                 </a>
             </div>

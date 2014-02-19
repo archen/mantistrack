@@ -10,8 +10,8 @@
 
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
     <div class="dummy"></div>
-        <a class="btn btn-default thumbnail text-center in" href="{% url 'feeders:add-feeder' %}">
-            <img class="addbutton" src="{% static 'img/plus-gray-128x128.png' %}" >
+        <a class="btn btn-default thumbnail text-center in-square" href="{% url 'feeders:add-feeder' %}">
+            <img class="scalable-add-button" src="{% static 'img/plus-gray-128x128.png' %}" >
         </a>
     </div>
     {% endif %}
@@ -20,7 +20,7 @@
         {% for feeder in feeder_list %}
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 <div class="dummy"></div>
-                <a class="btn btn-default thumbnail text-center in" href="{% url 'feeders:detail-feeder' feeder.id %}">
+                <a class="btn btn-default thumbnail text-center in-square" href="{% url 'feeders:detail-feeder' feeder.id %}">
                     {{ feeder.short_name }}
                     {% if feeder.gallery.is_public %}
                         <img src='{{ feeder.pic }}' />
